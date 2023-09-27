@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useState, useRef } from "react";
 import styles from "../styles/game.module.css";
 export const Game = ({
   verifyLetter,
@@ -10,6 +11,19 @@ export const Game = ({
   guesses,
   score,
 }) => {
+  const [letter, setLetter] = useState("");
+
+  const letterInputRef = useRef(null)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    verifyLetter(letter)
+
+    setLetter("")
+
+    letterInputRef.current.focus()
+  }
   return (
     <div className={styles.game}>
       <p className={styles.points}>
@@ -35,8 +49,16 @@ export const Game = ({
       </div>
       <div className={styles.letterContainer}>
         <p>tente advinhar a letra</p>
-        <form>
-          <input type="text" name="letter" maxLength={1} required />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="letter"
+            maxLength={1}
+            required
+            onChange={(e) => setLetter(e.target.value)}
+            value={letter}
+            ref={letterInputRef}
+          />
           <button>jogar</button>
         </form>
       </div>
