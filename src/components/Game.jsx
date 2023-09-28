@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useRef } from "react";
 import styles from "../styles/game.module.css";
@@ -13,17 +14,17 @@ export const Game = ({
 }) => {
   const [letter, setLetter] = useState("");
 
-  const letterInputRef = useRef(null)
+  const letterInputRef = useRef(null);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    verifyLetter(letter)
+    verifyLetter(letter);
 
-    setLetter("")
+    setLetter("");
 
-    letterInputRef.current.focus()
-  }
+    letterInputRef.current.focus();
+  };
   return (
     <div className={styles.game}>
       <p className={styles.points}>
@@ -36,14 +37,12 @@ export const Game = ({
       <p>voce ainda tem {guesses} tentativas(s)</p>
       <div className={styles.wordContainer}>
         {letters.map((letter, i) =>
-          guessedLetters.includes(letters) ? (
+          guessedLetters.includes(letter) ? (
             <span key={i} className={styles.letter}>
               {letter}
             </span>
           ) : (
-            <span key={i} className={styles.blankSquare}>
-              {" "}
-            </span>
+            <span key={i} className={styles.blankSquare}></span>
           )
         )}
       </div>
